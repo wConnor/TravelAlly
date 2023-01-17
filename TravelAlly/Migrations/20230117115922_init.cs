@@ -18,7 +18,8 @@ namespace TravelAlly.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Lat = table.Column<double>(type: "float", nullable: false),
                     Lon = table.Column<double>(type: "float", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Continent = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,13 +73,13 @@ namespace TravelAlly.Migrations
 
             migrationBuilder.InsertData(
                 table: "City",
-                columns: new[] { "Id", "Country", "Lat", "Lon", "Name" },
-                values: new object[] { 1, "England", 51.507221999999999, -0.1275, "London" });
+                columns: new[] { "Id", "Continent", "Country", "Lat", "Lon", "Name" },
+                values: new object[] { 1, "Europe", "England", 51.507221999999999, -0.1275, "London" });
 
             migrationBuilder.InsertData(
                 table: "City",
-                columns: new[] { "Id", "Country", "Lat", "Lon", "Name" },
-                values: new object[] { 2, "France", 48.864716000000001, 2.3490139999999999, "Paris" });
+                columns: new[] { "Id", "Continent", "Country", "Lat", "Lon", "Name" },
+                values: new object[] { 2, "Europe", "France", 48.864716000000001, 2.3490139999999999, "Paris" });
 
             migrationBuilder.InsertData(
                 table: "Station",

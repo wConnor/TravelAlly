@@ -18,9 +18,9 @@ namespace TravelAlly.Controllers
 			return View();
 		}
 
-		public IActionResult Privacy()
+		public IActionResult Europe()
 		{
-			return View();
+			return View("~/Views/Home/Europe/Index.cshtml");
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

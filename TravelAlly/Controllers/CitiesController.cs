@@ -54,7 +54,7 @@ namespace TravelAlly.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Lat,Lon,Country")] City city)
+        public async Task<IActionResult> Create([Bind("Id,Name,Lat,Lon,Country,Continent")] City city)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace TravelAlly.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Lat,Lon,Country")] City city)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Lat,Lon,Country,Continent")] City city)
         {
             if (id != city.Id)
             {
@@ -141,7 +141,7 @@ namespace TravelAlly.Controllers
         {
             if (_context.City == null)
             {
-                return Problem("Entity set 'TravelAllyContext.City'  is null.");
+                return Problem("Entity set 'TravelAllyContext.City' is null.");
             }
             var city = await _context.City.FindAsync(id);
             if (city != null)

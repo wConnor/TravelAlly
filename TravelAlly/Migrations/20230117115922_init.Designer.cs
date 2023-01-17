@@ -12,7 +12,7 @@ using TravelAlly.Data;
 namespace TravelAlly.Migrations
 {
     [DbContext(typeof(TravelAllyContext))]
-    [Migration("20230116150913_init")]
+    [Migration("20230117115922_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace TravelAlly.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Continent")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
@@ -52,6 +55,7 @@ namespace TravelAlly.Migrations
                         new
                         {
                             Id = 1,
+                            Continent = "Europe",
                             Country = "England",
                             Lat = 51.507221999999999,
                             Lon = -0.1275,
@@ -60,6 +64,7 @@ namespace TravelAlly.Migrations
                         new
                         {
                             Id = 2,
+                            Continent = "Europe",
                             Country = "France",
                             Lat = 48.864716000000001,
                             Lon = 2.3490139999999999,

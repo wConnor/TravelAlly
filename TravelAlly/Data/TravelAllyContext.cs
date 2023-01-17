@@ -23,7 +23,8 @@ namespace TravelAlly.Data
                     Name = "London",
                     Lat = 51.507222,
                     Lon = -0.1275,
-                    Country = "England"
+                    Country = "England",
+                    Continent = "Europe"
                 },
                 new City
                 {
@@ -31,7 +32,8 @@ namespace TravelAlly.Data
                     Name = "Paris",
                     Lat = 48.864716,
                     Lon = 2.349014,
-                    Country = "France"
+                    Country = "France",
+                    Continent = "Europe"
                 }
             );
             modelBuilder.Entity<Station>().HasData(
