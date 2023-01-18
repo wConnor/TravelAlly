@@ -2,3 +2,6 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+function displayMap() {
+	var map = L.map("map").setView([51.505, -0.09], 13);
+}

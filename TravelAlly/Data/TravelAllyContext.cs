@@ -23,7 +23,7 @@ namespace TravelAlly.Data
                     Name = "London",
                     Lat = 51.507222,
                     Lon = -0.1275,
-                    Country = "England",
+                    Country = "United Kingdom",
                     Continent = "Europe"
                 },
                 new City
