@@ -1,18 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TravelAlly.Models
 {
 	public class Transport
 	{
+		public Transport() { }
+
 		[Key]
 		public int Id { get; set; }
 		public TransportType Type { get; set; }
 		public String? Carrier { get; set; }
-		[DataType(DataType.Time)]
-		public DateTime DepartureTime { get; set; }
-		[DataType(DataType.Time)]
-		public DateTime ArrivalTime { get; set; }
-		public ICollection<Station>? StationsServed { get; set; }
-
+		[DisplayName("Operates On Days")]
+		public WeekDay? OperatesOnDays { get; set; }
+		[DisplayName("Stations Served (Station, Arrival : Departure)")]		
+		public virtual List<StationPassing>? StationPassings { get; set; }
 	}
 }

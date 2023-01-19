@@ -62,7 +62,7 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Name,AcceptsTypes,Lat,Lon,CityName")] CreateStationViewModel csvm)
 		{
-			Station	Station	= new Station();
+			Station Station = new Station();
 			Station.Name = csvm.Name;
 			Station.AcceptsTypes = csvm.AcceptsTypes;
 			Station.Lat = csvm.Lat;
@@ -94,15 +94,15 @@ namespace TravelAlly.Controllers
 				return NotFound();
 			}
 
-			CreateStationViewModel csvm = new CreateStationViewModel();
+			CreateStationViewModel csvm = new CreateStationViewModel(Station.Id, Station.Name, Station.AcceptsTypes, Station.Lat, Station.Lon, null, new SelectList(_context.City.Select(c => c.Name).ToList(), Station.Name));
 
-			csvm.StationId = Station.Id;
-			csvm.Name = Station.Name;
-			csvm.Lat = Station.Lat;
-			csvm.Lon = Station.Lon;
-			csvm.AcceptsTypes = Station.AcceptsTypes;
-			// TODO: fix CityName field to have the default value of Station.Name.
-			csvm.CityNamesList = new SelectList(_context.City.Select(c => c.Name).ToList(), Station.Name);
+			//csvm.StationId = Station.Id;
+			//csvm.Name = Station.Name;
+			//csvm.Lat = Station.Lat;
+			//csvm.Lon = Station.Lon;
+			//csvm.AcceptsTypes = Station.AcceptsTypes;
+			//// TODO: fix CityName field to have the default value of Station.Name.
+			//csvm.CityNamesList = new SelectList(_context.City.Select(c => c.Name).ToList(), Station.Name);
 
 			return View(csvm);
 		}
