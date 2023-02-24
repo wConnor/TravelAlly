@@ -22,8 +22,10 @@ namespace TravelAlly.Controllers
 		// GET: Transports
 		public async Task<IActionResult> Index()
 		{
-			var	travelAllyContext =	_context.Transport.Include(t =>	t.StationPassings)
+			var travelAllyContext = _context.Transport
+				.Include(t => t.StationPassings)
 				.ThenInclude(sp => sp.Station);
+
 			return View(await travelAllyContext.ToListAsync());
 		}
 

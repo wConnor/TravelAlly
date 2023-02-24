@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using TravelAlly.Data;
 using TravelAlly.Models;
+using TravelAlly.ViewModels;
 
 namespace TravelAlly.Controllers
 {
@@ -30,11 +31,24 @@ namespace TravelAlly.Controllers
 		{
 			return View("~/Views/Home/Europe/Index.cshtml");
 		}
+
+		public IActionResult Japan()
+		{
+			return View("~/Views/Home/Asia/Japan.cshtml");
+		}
+
 		public IActionResult UnitedKingdom()
 		{
 			// to be changed to use CreateStationViewModel.
-			var	Stations = _context.Station.Where(s	=> s.City.Country == "United Kingdom");
-			return View("~/Views/Home/Europe/UnitedKingdom.cshtml", Stations);
+			var movm = new MapOutputViewModel();
+			movm.Stations = _context.Station.Where(s => s.City.Country == "United Kingdom").ToList();
+//			movm.TransportRoutes = _context.Transport.Include(s => s.ToList();
+			return View("~/Views/Home/Europe/UnitedKingdom.cshtml", movm);
+		}
+		
+		public IActionResult London()
+		{
+			return View("~/Views/Home/Europe/London.cshtml");
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

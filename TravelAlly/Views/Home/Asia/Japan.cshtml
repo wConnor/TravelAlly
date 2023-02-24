@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TravelAlly.Models.Station>
+@{
+	ViewData["Title"] = "Japan";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+</head>
+
+<body>
+	<h2>Japan</h2>
+
+
+
+
+
+
+	<div id="map">
+		<script type="text/javascript">
+			var map = L.map("map").setView([54.910, -3.432], 6);
+			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 19,
+				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+			}).addTo(map);
+
+			@foreach (var item in Model)
+			{
+				<text>
+				var marker = L.marker([@item.Lat, @item.Lon]).addTo(map);
+				marker.bindPopup("<b>@item.Name</b><br>@item.AcceptsTypes<br>@item.Lat,@item.Lon<br>@ViewData["Title"]").openPopup();
+				</text>
+			}
+		</script>
+	</div>
+</body>

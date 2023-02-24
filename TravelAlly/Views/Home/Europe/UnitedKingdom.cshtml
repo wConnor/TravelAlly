@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TravelAlly.Models.Station>
+﻿@model TravelAlly.ViewModels.MapOutputViewModel
+
 @{
 	ViewData["Title"] = "United Kingdom";
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,6 +11,7 @@
 </head>
 <body>
 	<h2>United Kingdom</h2>
+	<p>Looking for London-specific travel advice? Visit the <a asp-controller="Home" asp-action="London">London</a> page.</p>
 	<h3>Train</h3>
 	<p>With the United Kingdom being a fairly small country, you will find yourself able to mostly rely on travelling by train. Smaller towns and villages may not have a railway station, but you will be able to take a train to a larger town in the area and then use local bus services to reach your destination. Strike action is fairly frequent, so be sure to check <a href="https://www.nationalrail.co.uk">NationalRail</a> for the latest updates.</p>
 	<p>It is also possible to travel to France, Belgium, and the Netherlands from London by train using the Eurostar.</p>
@@ -47,11 +49,30 @@
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 			}).addTo(map);
 
-			@foreach (var item in Model)
+			@foreach (var item in Model.Stations)
 			{
 				<text>
 				var marker = L.marker([@item.Lat, @item.Lon]).addTo(map);
 				marker.bindPopup("<b>@item.Name</b><br>@item.AcceptsTypes<br>@item.Lat,@item.Lon<br>@ViewData["Title"]").openPopup();
+				</text>
+			}
+
+			var points = [];
+
+			@foreach (var item in Model.TransportRoutes)
+			{
+				<text>
+				var points = [];
+				</text>
+
+				@foreach (var sp in item.StationPassings)
+				{
+					<text>
+					points.push(sp.Station.Lat,	sp.Station.Lon);
+					</text>
+				}
+				<text>
+				var	polyline = L.addTo(points).addTo(map);
 				</text>
 			}
 		</script>
