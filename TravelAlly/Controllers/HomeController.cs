@@ -27,9 +27,19 @@ namespace TravelAlly.Controllers
 			return View();
 		}
 
+		public IActionResult Map()
+		{
+			return View();
+		}
+
 		public IActionResult Europe()
 		{
 			return View("~/Views/Home/Europe/Index.cshtml");
+		}
+
+		public IActionResult Asia()
+		{
+			return View("~/Views/Home/Asia/Index.cshtml");
 		}
 
 		public IActionResult Japan()
@@ -42,7 +52,9 @@ namespace TravelAlly.Controllers
 			// to be changed to use CreateStationViewModel.
 			var movm = new MapOutputViewModel();
 			movm.Stations = _context.Station.Where(s => s.City.Country == "United Kingdom").ToList();
-//			movm.TransportRoutes = _context.Transport.Include(s => s.ToList();
+			movm.TransportRoutes = _context.Transport
+				.Include(s => s.StationPassings)
+				.ThenInclude(c => c.Station).ToList();
 			return View("~/Views/Home/Europe/UnitedKingdom.cshtml", movm);
 		}
 		

@@ -58,7 +58,7 @@ namespace TravelAlly.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Type,Carrier,OperatesOnDays")] Transport transport)
+		public async Task<IActionResult> Create([Bind("Id,Type,Carrier,OperatesOnDays,RouteType")] Transport transport)
 		{
 			if (ModelState.IsValid)
 			{
@@ -82,6 +82,7 @@ namespace TravelAlly.Controllers
 			{
 				return NotFound();
 			}
+
 			return View(transport);
 		}
 
@@ -90,7 +91,7 @@ namespace TravelAlly.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Carrier,OperatesOnDays")] Transport transport)
+		public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Carrier,OperatesOnDays,RouteType")] Transport transport)
 		{
 			if (id != transport.Id)
 			{

@@ -12,7 +12,7 @@ using TravelAlly.Data;
 namespace TravelAlly.Migrations
 {
     [DbContext(typeof(TravelAllyContext))]
-    [Migration("20230119102855_init")]
+    [Migration("20230225111625_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,24 +199,38 @@ namespace TravelAlly.Migrations
                         new
                         {
                             Id = 1,
-                            DepartureTime = new DateTime(2023, 1, 19, 8, 45, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2023, 2, 25, 8, 45, 0, 0, DateTimeKind.Unspecified),
                             StationId = 5,
                             TransportId = 1
                         },
                         new
                         {
                             Id = 2,
-                            ArrivalTime = new DateTime(2023, 1, 19, 9, 8, 0, 0, DateTimeKind.Unspecified),
-                            DepartureTime = new DateTime(2023, 1, 19, 9, 9, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2023, 2, 25, 9, 8, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2023, 2, 25, 9, 9, 0, 0, DateTimeKind.Unspecified),
                             StationId = 4,
                             TransportId = 1
                         },
                         new
                         {
                             Id = 3,
-                            ArrivalTime = new DateTime(2023, 1, 19, 9, 41, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2023, 2, 25, 9, 41, 0, 0, DateTimeKind.Unspecified),
                             StationId = 3,
                             TransportId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DepartureTime = new DateTime(2023, 2, 25, 10, 34, 0, 0, DateTimeKind.Unspecified),
+                            StationId = 1,
+                            TransportId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ArrivalTime = new DateTime(2023, 2, 25, 15, 8, 0, 0, DateTimeKind.Unspecified),
+                            StationId = 2,
+                            TransportId = 2
                         });
                 });
 
@@ -234,6 +248,9 @@ namespace TravelAlly.Migrations
                     b.Property<int?>("OperatesOnDays")
                         .HasColumnType("int");
 
+                    b.Property<int>("RouteType")
+                        .HasColumnType("int");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -247,6 +264,15 @@ namespace TravelAlly.Migrations
                             Id = 1,
                             Carrier = "South Western Railway",
                             OperatesOnDays = 21,
+                            RouteType = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Carrier = "Eurostar",
+                            OperatesOnDays = 127,
+                            RouteType = 1,
                             Type = 1
                         });
                 });

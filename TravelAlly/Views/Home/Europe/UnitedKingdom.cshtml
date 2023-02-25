@@ -53,7 +53,10 @@
 			{
 				<text>
 				var marker = L.marker([@item.Lat, @item.Lon]).addTo(map);
-				marker.bindPopup("<b>@item.Name</b><br>@item.AcceptsTypes<br>@item.Lat,@item.Lon<br>@ViewData["Title"]").openPopup();
+				marker.bindPopup("<b>@item.Name</b>\
+				<br><b>Accepts Transport</b>: @item.AcceptsTypes\
+				<br><b>Coordinates</b>: @item.Lat,@item.Lon\
+				<br>@ViewData["Title"]").openPopup();
 				</text>
 			}
 
@@ -62,17 +65,38 @@
 			@foreach (var item in Model.TransportRoutes)
 			{
 				<text>
-				var points = [];
+				var points;
 				</text>
 
 				@foreach (var sp in item.StationPassings)
 				{
 					<text>
-					points.push(sp.Station.Lat,	sp.Station.Lon);
+					points.push([@sp.Station.Lat, @sp.Station.Lon]);
 					</text>
 				}
+				@if (item.RouteType == RouteType.DOMESTIC)
+				{
+					<text>
+					var polyLine = L.polyline(points, { color: "blue" });
+					</text>
+				}
+				else
+				{
+					<text>
+					var	polyLine = L.polyline(points, {	color: "red" });
+					</text>
+				}
+
 				<text>
-				var	polyline = L.addTo(points).addTo(map);
+				polyLine.bindPopup("<b>@item.Carrier</b><br>\
+				<b>Transport Type</b>: @item.Type<br>\
+				<b>Route Type</b>: @item.RouteType<br>\
+				<b>Operates on Days</b>: @item.OperatesOnDays<br>\
+				<b>Origin</b>: @item.StationPassings[0].Station.Name<br>\
+				<b>Destination</b>: @item.StationPassings[item.StationPassings.Count-1].Station.Name");
+
+				polyLine.addTo(map);
+				points.length = 0;
 				</text>
 			}
 		</script>

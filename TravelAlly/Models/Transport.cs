@@ -13,6 +13,7 @@ namespace TravelAlly.Models
 		[Key]
 		public int Id { get; set; }
 		public TransportType Type { get; set; }
+		public RouteType RouteType { get; set; }
 		public String? Carrier { get; set; }
 		[DisplayName("Operates On Days")]
 		public WeekDay? OperatesOnDays { get; set; }

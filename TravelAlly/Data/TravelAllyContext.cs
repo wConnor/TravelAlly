@@ -131,14 +131,45 @@ namespace TravelAlly.Data
 				WAT
 				);
 
+			StationPassing STP = new StationPassing
+			{
+				Id = 4,
+				StationId = 1,
+				ArrivalTime = null,
+				DepartureTime = DateTime.Parse("10:34"),
+				TransportId = 2
+			};
+
+			StationPassing GDN = new StationPassing
+			{
+				Id = 5,
+				StationId = 2,
+				ArrivalTime = DateTime.Parse("15:08"),
+				DepartureTime = null,
+				TransportId = 2
+			};
+
+			modelBuilder.Entity<StationPassing>().HasData(
+				STP,
+				GDN
+			);
+
 			modelBuilder.Entity<Transport>().HasData(
 				new Transport
 				{
 					Id = 1,
 					Type = TransportType.RAILWAY,
+					RouteType = RouteType.DOMESTIC,
 					Carrier = "South Western Railway",
 					OperatesOnDays = WeekDay.MONDAY | WeekDay.WEDNESDAY | WeekDay.FRIDAY,
-//					StationPassings = Passings
+				},
+				new Transport
+				{
+					Id = 2,
+					Type = TransportType.RAILWAY,
+					RouteType = RouteType.INTERNATIONAL,
+					Carrier = "Eurostar",
+					OperatesOnDays = WeekDay.MONDAY | WeekDay.TUESDAY | WeekDay.WEDNESDAY | WeekDay.THURSDAY | WeekDay.FRIDAY | WeekDay.SATURDAY | WeekDay.SUNDAY
 				}
 				);
 		}
