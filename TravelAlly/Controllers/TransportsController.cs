@@ -14,7 +14,7 @@ namespace TravelAlly.Controllers
 {
 	public class TransportsController : Controller
 	{
-		private TransportService _service;		
+		private readonly TransportService _service;		
 
 		public TransportsController(TransportService service)
 		{

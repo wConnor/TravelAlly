@@ -7,24 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TravelAlly.Data;
 using TravelAlly.Models;
+using TravelAlly.Services;
 using TravelAlly.ViewModels;
 
 namespace TravelAlly.Controllers
 {
 	public class StationsController : Controller
 	{
-		private readonly TravelAllyContext _context;
+		private readonly StationService _service;
+		private readonly CityService _cityService;
 
-		public StationsController(TravelAllyContext context)
+		public StationsController(StationService service, CityService cityService)
 		{
-			_context = context;
+			_service = service;
+			_cityService = cityService;
 		}
 
 		// GET: Stations
 		public async Task<IActionResult> Index()
 		{
-			var travelAllyContext = _context.Station.Include(s => s.City);
-			return View(await travelAllyContext.ToListAsync());
+			return View(_service.ListStations());
 		}
 
 		// GET: Stations/Details/5
@@ -67,34 +69,28 @@ namespace TravelAlly.Controllers
 			Station.AcceptsTypes = csvm.AcceptsTypes;
 			Station.Lat = csvm.Lat;
 			Station.Lon = csvm.Lon;
-			Station.City = await _context.City.FirstOrDefaultAsync(c => c.Name == csvm.CityName);
+			Station.City = _cityService.GetCityByName(csvm.CityName);
 
-			if (ModelState.IsValid)
+			if (_service.CreateStation(Station))
 			{
-				_context.Add(Station);
-				await _context.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));
 			}
-
-			return View(Station);
+			else
+			{
+				return View(Station);
+			}
 		}
 
 		// GET: Stations/Edit/5
 		public async Task<IActionResult> Edit(int? id)
 		{
-			if (id == null || _context.Station == null)
-			{
-				return NotFound();
-			}
-
-
-			var Station = await _context.Station.FindAsync(id);
+			var Station = _service.GetStation(id.Value);
 			if (Station == null)
 			{
 				return NotFound();
 			}
 
-			CreateStationViewModel csvm = new CreateStationViewModel(Station.Id, Station.Name, Station.AcceptsTypes, Station.Lat, Station.Lon, null, new SelectList(_context.City.Select(c => c.Name).ToList(), Station.Name));
+			CreateStationViewModel csvm = new CreateStationViewModel(Station.Id, Station.Name, Station.AcceptsTypes, Station.Lat, Station.Lon, null, new SelectList(_cityService.ListCityNames(), Station.Name));
 
 			//csvm.StationId = Station.Id;
 			//csvm.Name = Station.Name;
@@ -120,8 +116,8 @@ namespace TravelAlly.Controllers
 				return NotFound();
 			}
 
-			var Station = await _context.Station.FindAsync(csvm.StationId);
-			var City = await _context.City.FirstOrDefaultAsync(c => c.Name == csvm.CityName);
+			var Station = _service.GetStation(csvm.StationId);
+			var City = _cityService.GetCityByName(csvm.CityName);
 
 			Station.Name = csvm.Name;
 			Station.Lat = csvm.Lat;
@@ -156,14 +152,8 @@ namespace TravelAlly.Controllers
 		// GET: Stations/Delete/5
 		public async Task<IActionResult> Delete(int? id)
 		{
-			if (id == null || _context.Station == null)
-			{
-				return NotFound();
-			}
+			var station = _service.GetStation(id);
 
-			var station = await _context.Station
-				.Include(s => s.City)
-				.FirstOrDefaultAsync(m => m.Id == id);
 			if (station == null)
 			{
 				return NotFound();
@@ -177,23 +167,8 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id)
 		{
-			if (_context.Station == null)
-			{
-				return Problem("Entity set 'TravelAllyContext.Station' is null.");
-			}
-			var station = await _context.Station.FindAsync(id);
-			if (station != null)
-			{
-				_context.Station.Remove(station);
-			}
-
-			await _context.SaveChangesAsync();
+			_service.DeleteStation(id);
 			return RedirectToAction(nameof(Index));
-		}
-
-		private bool StationExists(int id)
-		{
-			return _context.Station.Any(e => e.Id == id);
 		}
 	}
 }
