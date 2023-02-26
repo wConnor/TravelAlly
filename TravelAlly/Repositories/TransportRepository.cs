@@ -21,7 +21,7 @@ namespace TravelAlly.Repositories
 			try
 			{
 				_context.Add(T);
-				_context.SaveChangesAsync();
+				_context.SaveChanges();
 				return true;
 			} 
 			catch
@@ -33,6 +33,8 @@ namespace TravelAlly.Repositories
 		public Transport GetTransport(int id)
 		{
 			return _context.Transport
+                .Include(t => t.StationPassings)
+                .ThenInclude(sp => sp.Station)
 				.FirstOrDefault(m => m.Id == id);
 		}
 

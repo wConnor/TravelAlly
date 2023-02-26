@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -32,27 +33,26 @@ namespace TravelAlly.Controllers
 		// GET: Stations/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
-			if (id == null || _context.Station == null)
+			if (id == null)
 			{
 				return NotFound();
 			}
 
-			var station = await _context.Station
-				.Include(s => s.City)
-				.FirstOrDefaultAsync(m => m.Id == id);
-			if (station == null)
+			var Station = _service.GetStation(id);
+
+			if (Station == null)
 			{
 				return NotFound();
 			}
 
-			return View(station);
+			return View(Station);
 		}
 
 		// GET: Stations/Create
 		public IActionResult Create()
 		{
 			CreateStationViewModel csvm = new CreateStationViewModel();
-			csvm.CityNamesList = new SelectList(_context.City.Select(c => c.Name).ToList());
+			csvm.CityNamesList = new SelectList(_cityService.ListCityNames());
 
 			return View(csvm);
 		}
@@ -123,30 +123,16 @@ namespace TravelAlly.Controllers
 			Station.Lat = csvm.Lat;
 			Station.Lon = csvm.Lon;
 			Station.AcceptsTypes = csvm.AcceptsTypes;
-			Station.City = City;
+            Station.City = City;
 
-			if (ModelState.IsValid)
-			{
-				try
-				{
-					_context.Update(Station);
-					await _context.SaveChangesAsync();
-				}
-				catch (DbUpdateConcurrencyException)
-				{
-					if (!StationExists(csvm.StationId))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
-				}
-				return RedirectToAction(nameof(Index));
-			}
-
-			return View(Station);
+            if (_service.UpdateStation(id, Station))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(Station);
+            }
 		}
 
 		// GET: Stations/Delete/5

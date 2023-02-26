@@ -32,7 +32,9 @@ namespace TravelAlly.Repositories
 
 		public Station GetStation(int id)
 		{
-			return _context.Station.FirstOrDefault(m => m.Id == id);
+			return _context.Station
+				.Include(c => c.City)
+				.FirstOrDefault(m => m.Id == id);
 		}
 
 		public bool UpdateStation(Station S)

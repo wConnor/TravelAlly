@@ -16,6 +16,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddScoped<CityRepository>();
+builder.Services.AddScoped<CityService>();
+builder.Services.AddScoped<StationRepository>();
+builder.Services.AddScoped<StationService>();
 builder.Services.AddScoped<TransportRepository>();
 builder.Services.AddScoped<TransportService>();
 

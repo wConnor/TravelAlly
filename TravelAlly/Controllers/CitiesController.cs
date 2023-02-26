@@ -7,40 +7,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TravelAlly.Data;
 using TravelAlly.Models;
+using TravelAlly.Services;
 
 namespace TravelAlly.Controllers
 {
     public class CitiesController : Controller
     {
-        private readonly TravelAllyContext _context;
+        private readonly CityService _service;
 
-        public CitiesController(TravelAllyContext context)
+        public CitiesController(CityService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: Cities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.City.ToListAsync());
+            return View(_service.ListCities());
         }
 
         // GET: Cities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.City == null)
+            var City = _service.GetCity(id);
+
+            if (City == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.City
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (city == null)
-            {
-                return NotFound();
-            }
-
-            return View(city);
+            return View(City);
         }
 
         // GET: Cities/Create
@@ -56,29 +52,31 @@ namespace TravelAlly.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Lat,Lon,Country,Continent")] City city)
         {
-            if (ModelState.IsValid)
+            if (_service.CreateCity(city))
             {
-                _context.Add(city);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            else
+            {
+                return View(city);
+            }
         }
 
         // GET: Cities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.City == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.City.FindAsync(id);
-            if (city == null)
+            var City = _service.GetCity(id);
+
+            if (City == null)
             {
                 return NotFound();
             }
-            return View(city);
+            return View(City);
         }
 
         // POST: Cities/Edit/5
@@ -93,45 +91,32 @@ namespace TravelAlly.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (_service.UpdateCity(id, city))
             {
-                try
-                {
-                    _context.Update(city);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CityExists(city.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            else
+            {
+                return View(city);
+            }
         }
 
         // GET: Cities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.City == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.City
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            var City = _service.GetCity(id);
+
+            if (City == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(City);
         }
 
         // POST: Cities/Delete/5
@@ -139,23 +124,8 @@ namespace TravelAlly.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.City == null)
-            {
-                return Problem("Entity set 'TravelAllyContext.City' is null.");
-            }
-            var city = await _context.City.FindAsync(id);
-            if (city != null)
-            {
-                _context.City.Remove(city);
-            }
-            
-            await _context.SaveChangesAsync();
+            _service.DeleteCity(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CityExists(int id)
-        {
-          return _context.City.Any(e => e.Id == id);
         }
     }
 }
