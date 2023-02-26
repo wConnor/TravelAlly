@@ -7,38 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TravelAlly.Data;
 using TravelAlly.Models;
+using TravelAlly.Repositories;
+using TravelAlly.Services;
 
 namespace TravelAlly.Controllers
 {
 	public class TransportsController : Controller
 	{
-		private readonly TravelAllyContext _context;
+		private TransportService _service;		
 
-		public TransportsController(TravelAllyContext context)
+		public TransportsController(TransportService service)
 		{
-			_context = context;
+			_service = new TransportService(this.ModelState);
 		}
 
 		// GET: Transports
 		public async Task<IActionResult> Index()
 		{
-			var travelAllyContext = _context.Transport
-				.Include(t => t.StationPassings)
-				.ThenInclude(sp => sp.Station);
-
-			return View(await travelAllyContext.ToListAsync());
+			return View(_service.ListTransports());
 		}
 
 		// GET: Transports/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
-			if (id == null || _context.Transport == null)
-			{
-				return NotFound();
-			}
+			var transport = _service.GetTransport(id);
 
-			var transport = await _context.Transport
-				.FirstOrDefaultAsync(m => m.Id == id);
 			if (transport == null)
 			{
 				return NotFound();
@@ -60,24 +53,21 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,Type,Carrier,OperatesOnDays,RouteType")] Transport transport)
 		{
-			if (ModelState.IsValid)
+			if (_service.CreateTransport(transport))
 			{
-				_context.Add(transport);
-				await _context.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));
 			}
-			return View(transport);
+			else
+			{
+				return View(transport);
+			}
 		}
 
 		// GET: Transports/Edit/5
 		public async Task<IActionResult> Edit(int? id)
 		{
-			if (id == null || _context.Transport == null)
-			{
-				return NotFound();
-			}
+			var transport = _service.GetTransport(id);
 
-			var transport = await _context.Transport.FindAsync(id);
 			if (transport == null)
 			{
 				return NotFound();
@@ -98,39 +88,24 @@ namespace TravelAlly.Controllers
 				return NotFound();
 			}
 
-			if (ModelState.IsValid)
+			if (_service.UpdateTransport(id, transport))
 			{
-				try
-				{
-					_context.Update(transport);
-					await _context.SaveChangesAsync();
-				}
-				catch (DbUpdateConcurrencyException)
-				{
-					if (!TransportExists(transport.Id))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
-				}
 				return RedirectToAction(nameof(Index));
 			}
-			return View(transport);
+			else if (!_service.TransportExists(transport.Id))
+			{
+				return NotFound();
+			} 
+			else
+			{
+				return View(transport);
+			}
 		}
 
 		// GET: Transports/Delete/5
 		public async Task<IActionResult> Delete(int? id)
 		{
-			if (id == null || _context.Transport == null)
-			{
-				return NotFound();
-			}
-
-			var transport = await _context.Transport
-				.FirstOrDefaultAsync(m => m.Id == id);
+			var transport = _service.GetTransport(id);
 			if (transport == null)
 			{
 				return NotFound();
@@ -144,23 +119,8 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id)
 		{
-			if (_context.Transport == null)
-			{
-				return Problem("Entity set 'TravelAllyContext.Transport' is null.");
-			}
-			var transport = await _context.Transport.FindAsync(id);
-			if (transport != null)
-			{
-				_context.Transport.Remove(transport);
-			}
-
-			await _context.SaveChangesAsync();
+			_service.DeleteTransport(id);
 			return RedirectToAction(nameof(Index));
-		}
-
-		private bool TransportExists(int id)
-		{
-			return _context.Transport.Any(e => e.Id == id);
 		}
 	}
 }

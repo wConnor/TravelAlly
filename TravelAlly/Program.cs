@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using TravelAlly.Data;
 using Microsoft.Extensions.DependencyInjection;
+using TravelAlly.Repositories;
+using TravelAlly.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TravelAllyContext>(options =>
@@ -16,6 +18,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<TransportRepository>();
 
 var app = builder.Build();
 

@@ -22,7 +22,6 @@ namespace TravelAlly.ViewModels
         public TransportType AcceptsTypes { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }
-
         public String CityName { get; set; }
         public SelectList CityNamesList { get; set; }
     }
