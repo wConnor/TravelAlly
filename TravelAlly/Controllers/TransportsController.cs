@@ -18,7 +18,8 @@ namespace TravelAlly.Controllers
 
 		public TransportsController(TransportService service)
 		{
-			_service = new TransportService(this.ModelState);
+			_service = service;
+			_service.SetModelState(this.ModelState);
 		}
 
 		// GET: Transports

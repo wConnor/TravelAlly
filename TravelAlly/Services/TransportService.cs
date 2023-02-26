@@ -10,10 +10,14 @@ namespace TravelAlly.Services
 		private TransportRepository _repository;
 		private ModelStateDictionary _modelState;
 
-		public TransportService(ModelStateDictionary modelState)
+		public TransportService(TransportRepository repository)
+		{
+			_repository = repository;
+		}
+
+		public void SetModelState(ModelStateDictionary modelState)
 		{
 			_modelState = modelState;
-			_repository = new TransportRepository(new TravelAllyContext(null));
 		}
 
 		protected bool ValidateTransport(Transport T)

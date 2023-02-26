@@ -9,9 +9,9 @@ namespace TravelAlly.Repositories
 {
 	public class TransportRepository
 	{
-		private readonly TravelAllyContext _context;
+		private TravelAllyContext _context;
 
-		public TransportRepository(TravelAllyContext context)
+        public TransportRepository(TravelAllyContext context)
 		{
 			_context = context;
 		}

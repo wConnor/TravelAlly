@@ -4,6 +4,7 @@ using TravelAlly.Data;
 using Microsoft.Extensions.DependencyInjection;
 using TravelAlly.Repositories;
 using TravelAlly.Services;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TravelAllyContext>(options =>
@@ -15,10 +16,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddScoped<TransportRepository>();
+builder.Services.AddScoped<TransportService>();
+
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<TransportRepository>();
+
+
 
 var app = builder.Build();
 
