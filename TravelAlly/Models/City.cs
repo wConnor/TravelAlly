@@ -5,7 +5,7 @@ namespace TravelAlly.Models
 	public class City
 	{
 		public City() {	}
-		public City(int id, string? name, double lat, double lon, /*TimeZoneInfo timeZone*/ string? country, string? continent)
+		public City(int id, string? name, double lat, double lon, /*TimeZoneInfo timeZone*/ string? country, Continent? continent)
 		{
 			Id = id;
 			Name = name;
@@ -23,6 +23,6 @@ namespace TravelAlly.Models
 		public double Lon { get; set; }
 		//public TimeZoneInfo TimeZone { get; set; }
 		public string? Country { get; set; }
-		public string? Continent { get; set; }
+		public Continent? Continent { get; set; }
 	}
 }

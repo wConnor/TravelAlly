@@ -1,6 +1,29 @@
-﻿@{
+﻿@model TravelAlly.ViewModels.RoutePlannerRequestViewModel
+
+@{
     ViewData["Title"] = "Route Planner";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Route Planner</h2>
+<head>
+
+</head>
+<body>
+	<h2>Route Planner</h2>
+
+	<br/>
+
+	<form asp-action="FindRoute">
+		<div class="form-group">
+			<label asp-for="Origin"></label>
+			<select	asp-for="Origin" asp-items="Model.CityNames"></select>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="Destination"></label>
+			<select	asp-for="Destination" asp-items="Model.CityNames"></select>
+		</div>
+
+		<button	type="submit">Search</button>
+	</form>
+</body>

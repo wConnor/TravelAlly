@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelAlly.Data;
 
@@ -11,9 +12,10 @@ using TravelAlly.Data;
 namespace TravelAlly.Migrations
 {
     [DbContext(typeof(TravelAllyContext))]
-    partial class TravelAllyContextModelSnapshot : ModelSnapshot
+    [Migration("20230227163939_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

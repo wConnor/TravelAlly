@@ -70,7 +70,14 @@ namespace TravelAlly.Repositories
 				.Where(s => s.City.Country == Country);
 		}
 
-		public bool StationExists(int id)
+        public IEnumerable<Station> ListStationsByCity(string City)
+        {
+            return _context.Station
+                .Include(s => s.City)
+                .Where(s => s.City.Name == City);
+        }
+
+        public bool StationExists(int id)
 		{
 			return _context.Station.Any(e => e.Id == id);
 		}

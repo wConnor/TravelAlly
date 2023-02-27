@@ -38,9 +38,9 @@ namespace TravelAlly.Repositories
 		{
 			return _context.City.FirstOrDefault(m => m.Name == name);
 		}
-		public List<string> ListCityNames()
+		public IEnumerable<string> ListCityNames()
 		{
-			return _context.City.Select(c => c.Name).ToList();
+			return _context.City.Select(c => c.Name);
 		}
 
 		public bool UpdateCity(City S)

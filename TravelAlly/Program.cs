@@ -22,6 +22,7 @@ builder.Services.AddScoped<StationRepository>();
 builder.Services.AddScoped<StationService>();
 builder.Services.AddScoped<TransportRepository>();
 builder.Services.AddScoped<TransportService>();
+builder.Services.AddScoped<RoutePlannerService>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<ApplicationDbContext>();

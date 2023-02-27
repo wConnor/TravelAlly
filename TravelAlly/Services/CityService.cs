@@ -94,9 +94,9 @@ namespace TravelAlly.Services
 			return _repository.ListCities();
 		}
 
-		public IEnumerable<City> ListCityNames()
+		public IEnumerable<string> ListCityNames()
 		{
-			return _repository.ListCities();
+			return _repository.ListCityNames();
 		}
 
 		public bool CityExists(int id)

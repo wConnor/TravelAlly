@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace TravelAlly.Models
 {
@@ -19,8 +20,11 @@ namespace TravelAlly.Models
 		[Key]
 		public int Id { get; set; }
 		public String? Name { get; set; }
+		[DisplayName("Accepts Transport Types")]
 		public TransportType AcceptsTypes { get; set; }
+		[DisplayName("Latitude")]
 		public double Lat { get; set; }
+		[DisplayName("Longitude")]
 		public double Lon { get; set; }
 		public int CityId { get; set; }
 		public City? City { get; set; }
