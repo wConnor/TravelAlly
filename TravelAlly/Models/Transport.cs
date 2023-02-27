@@ -12,6 +12,7 @@ namespace TravelAlly.Models
 
 		[Key]
 		public int Id { get; set; }
+		public String? RouteCode { get; set; }
 		public TransportType Type { get; set; }
 		public RouteType RouteType { get; set; }
 		public String? Carrier { get; set; }

@@ -41,6 +41,7 @@
 
 	<h3>Coach</h3>
 
+	<h3>Map</h3>
 	<div id="map">
 		<script type="text/javascript">
 			var map = L.map("map").setView([54.910, -3.432], 6);
@@ -55,8 +56,8 @@
 				var marker = L.marker([@item.Lat, @item.Lon]).addTo(map);
 				marker.bindPopup("<b>@item.Name</b>\
 				<br><b>Accepts Transport</b>: @item.AcceptsTypes\
-				<br><b>Coordinates</b>: @item.Lat,@item.Lon\
-				<br>@ViewData["Title"]").openPopup();
+				<br><b>Coordinates</b>: @item.Lat, @item.Lon\
+				<br>@item.City.Country,	@item.City.Continent");
 				</text>
 			}
 
@@ -74,6 +75,7 @@
 					points.push([@sp.Station.Lat, @sp.Station.Lon]);
 					</text>
 				}
+
 				@if (item.RouteType == RouteType.DOMESTIC)
 				{
 					<text>
@@ -89,6 +91,7 @@
 
 				<text>
 				polyLine.bindPopup("<b>@item.Carrier</b><br>\
+				<b>Route Code</b>: @item.RouteCode<br>\
 				<b>Transport Type</b>: @item.Type<br>\
 				<b>Route Type</b>: @item.RouteType<br>\
 				<b>Operates on Days</b>: @item.OperatesOnDays<br>\

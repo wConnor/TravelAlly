@@ -20,6 +20,7 @@ namespace TravelAlly.Data
 					Name = "London",
 					Lat = 51.507222,
 					Lon = -0.1275,
+					//TimeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time"),
 					Country = "United Kingdom",
 					Continent = "Europe"
 				},
@@ -29,6 +30,7 @@ namespace TravelAlly.Data
 					Name = "Paris",
 					Lat = 48.864716,
 					Lon = 2.349014,
+					//TimeZone = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"),
 					Country = "France",
 					Continent = "Europe"
 				},
@@ -38,6 +40,7 @@ namespace TravelAlly.Data
 					Name = "Woking",
 					Lat = 51.316366,
 					Lon = -0.557833,
+					//TimeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time"),
 					Country = "United Kingdom",
 					Continent = "Europe"
 				},
@@ -47,6 +50,7 @@ namespace TravelAlly.Data
 					Name = "Basingstoke",
 					Lat = 51.263320,
 					Lon = -1.090735,
+					//TimeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time"),
 					Country = "United Kingdom",
 					Continent = "Europe"
 				}

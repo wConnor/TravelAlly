@@ -63,6 +63,12 @@ namespace TravelAlly.Repositories
 		{
 			return _context.Station.Include(s => s.City);
 		}
+		public IEnumerable<Station> ListStationsByCountry(string Country)
+		{
+			return _context.Station
+				.Include(s => s.City)
+				.Where(s => s.City.Country == Country);
+		}
 
 		public bool StationExists(int id)
 		{

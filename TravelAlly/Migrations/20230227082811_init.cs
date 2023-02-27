@@ -32,6 +32,7 @@ namespace TravelAlly.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    RouteCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<int>(type: "int", nullable: false),
                     RouteType = table.Column<int>(type: "int", nullable: false),
                     Carrier = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -106,11 +107,11 @@ namespace TravelAlly.Migrations
 
             migrationBuilder.InsertData(
                 table: "Transport",
-                columns: new[] { "Id", "Carrier", "OperatesOnDays", "RouteType", "Type" },
+                columns: new[] { "Id", "Carrier", "OperatesOnDays", "RouteCode", "RouteType", "Type" },
                 values: new object[,]
                 {
-                    { 1, "South Western Railway", 21, 0, 1 },
-                    { 2, "Eurostar", 127, 1, 1 }
+                    { 1, "South Western Railway", 21, null, 0, 1 },
+                    { 2, "Eurostar", 127, null, 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -130,11 +131,11 @@ namespace TravelAlly.Migrations
                 columns: new[] { "Id", "ArrivalTime", "DepartureTime", "StationId", "TransportId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 2, 26, 8, 45, 0, 0, DateTimeKind.Unspecified), 5, 1 },
-                    { 2, new DateTime(2023, 2, 26, 9, 8, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 26, 9, 9, 0, 0, DateTimeKind.Unspecified), 4, 1 },
-                    { 3, new DateTime(2023, 2, 26, 9, 41, 0, 0, DateTimeKind.Unspecified), null, 3, 1 },
-                    { 4, null, new DateTime(2023, 2, 26, 10, 34, 0, 0, DateTimeKind.Unspecified), 1, 2 },
-                    { 5, new DateTime(2023, 2, 26, 15, 8, 0, 0, DateTimeKind.Unspecified), null, 2, 2 }
+                    { 1, null, new DateTime(2023, 2, 27, 8, 45, 0, 0, DateTimeKind.Unspecified), 5, 1 },
+                    { 2, new DateTime(2023, 2, 27, 9, 8, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 27, 9, 9, 0, 0, DateTimeKind.Unspecified), 4, 1 },
+                    { 3, new DateTime(2023, 2, 27, 9, 41, 0, 0, DateTimeKind.Unspecified), null, 3, 1 },
+                    { 4, null, new DateTime(2023, 2, 27, 10, 34, 0, 0, DateTimeKind.Unspecified), 1, 2 },
+                    { 5, new DateTime(2023, 2, 27, 15, 8, 0, 0, DateTimeKind.Unspecified), null, 2, 2 }
                 });
 
             migrationBuilder.CreateIndex(

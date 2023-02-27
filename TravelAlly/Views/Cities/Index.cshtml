@@ -17,13 +17,13 @@
 				@Html.DisplayNameFor(model => model.Name)
 			</th>
 			<th>
-				Coordinates (lat, lon)
-			</th>
-			<th>
 				@Html.DisplayNameFor(model => model.Country)
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.Continent)
+			</th>
+			<th>
+				Coordinates (lat, lon)
 			</th>
 			<th></th>
 		</tr>
@@ -36,13 +36,13 @@
 					@Html.DisplayFor(modelItem => item.Name)
 				</td>
 				<td>
-					{ @Html.DisplayFor(modelItem => item.Lat) , @Html.DisplayFor(modelItem => item.Lon) }
-				</td>
-				<td>
 					@Html.DisplayFor(modelItem => item.Country)
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.Continent)
+				</td>
+				<td>
+					{ @Html.DisplayFor(modelItem => item.Lat) , @Html.DisplayFor(modelItem => item.Lon) }
 				</td>
 				<td>
 					<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -197,36 +197,36 @@ namespace TravelAlly.Migrations
                         new
                         {
                             Id = 1,
-                            DepartureTime = new DateTime(2023, 2, 26, 8, 45, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2023, 2, 27, 8, 45, 0, 0, DateTimeKind.Unspecified),
                             StationId = 5,
                             TransportId = 1
                         },
                         new
                         {
                             Id = 2,
-                            ArrivalTime = new DateTime(2023, 2, 26, 9, 8, 0, 0, DateTimeKind.Unspecified),
-                            DepartureTime = new DateTime(2023, 2, 26, 9, 9, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2023, 2, 27, 9, 8, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2023, 2, 27, 9, 9, 0, 0, DateTimeKind.Unspecified),
                             StationId = 4,
                             TransportId = 1
                         },
                         new
                         {
                             Id = 3,
-                            ArrivalTime = new DateTime(2023, 2, 26, 9, 41, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2023, 2, 27, 9, 41, 0, 0, DateTimeKind.Unspecified),
                             StationId = 3,
                             TransportId = 1
                         },
                         new
                         {
                             Id = 4,
-                            DepartureTime = new DateTime(2023, 2, 26, 10, 34, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2023, 2, 27, 10, 34, 0, 0, DateTimeKind.Unspecified),
                             StationId = 1,
                             TransportId = 2
                         },
                         new
                         {
                             Id = 5,
-                            ArrivalTime = new DateTime(2023, 2, 26, 15, 8, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2023, 2, 27, 15, 8, 0, 0, DateTimeKind.Unspecified),
                             StationId = 2,
                             TransportId = 2
                         });
@@ -245,6 +245,9 @@ namespace TravelAlly.Migrations
 
                     b.Property<int?>("OperatesOnDays")
                         .HasColumnType("int");
+
+                    b.Property<string>("RouteCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RouteType")
                         .HasColumnType("int");

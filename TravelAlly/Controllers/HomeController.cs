@@ -3,23 +3,21 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using TravelAlly.Data;
 using TravelAlly.Models;
+using TravelAlly.Services;
 using TravelAlly.ViewModels;
 
 namespace TravelAlly.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
-		private readonly TravelAllyContext _context;
+//		private readonly ILogger<HomeController> _logger;
+		private readonly TransportService _transportService;
+		private readonly StationService _stationService;
 
-		//public HomeController(ILogger<HomeController> logger)
-		//{
-		//	_logger = logger;
-		//}
-
-		public HomeController(TravelAllyContext context)
+		public HomeController(TransportService transportService, StationService stationService)
 		{
-			_context = context;
+			_transportService = transportService;
+			_stationService = stationService;
 		}
 
 		public IActionResult Index()
@@ -29,7 +27,11 @@ namespace TravelAlly.Controllers
 
 		public IActionResult Map()
 		{
-			return View();
+			MapOutputViewModel ViewModel = new MapOutputViewModel();
+			ViewModel.Stations = _stationService.ListStations().ToList();
+			ViewModel.TransportRoutes = _transportService.ListTransports().ToList();
+
+			return View(ViewModel);
 		}
 
 		public IActionResult Europe()
@@ -49,13 +51,11 @@ namespace TravelAlly.Controllers
 
 		public IActionResult UnitedKingdom()
 		{
-			// to be changed to use CreateStationViewModel.
-			var movm = new MapOutputViewModel();
-			movm.Stations = _context.Station.Where(s => s.City.Country == "United Kingdom").ToList();
-			movm.TransportRoutes = _context.Transport
-				.Include(s => s.StationPassings)
-				.ThenInclude(c => c.Station).ToList();
-			return View("~/Views/Home/Europe/UnitedKingdom.cshtml", movm);
+			var ViewModel = new MapOutputViewModel();
+			ViewModel.Stations = _stationService.ListStationsByCountry("United Kingdom").ToList();
+			ViewModel.TransportRoutes = _transportService.ListTransportsByCountry("United Kingdom").ToList();
+
+			return View("~/Views/Home/Europe/UnitedKingdom.cshtml", ViewModel);
 		}
 		
 		public IActionResult London()

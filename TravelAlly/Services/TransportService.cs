@@ -83,6 +83,10 @@ namespace TravelAlly.Services
 		{
 			return _repository.ListTransports();
 		}
+		public IEnumerable<Transport> ListTransportsByCountry(string Country)
+		{
+			return _repository.ListTransportsByCountry(Country);
+		}
 
 		public bool TransportExists(int id)
 		{

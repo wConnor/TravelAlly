@@ -66,6 +66,14 @@ namespace TravelAlly.Repositories
 				.Include(t => t.StationPassings)
 				.ThenInclude(sp => sp.Station).ToList();
 		}
+		public IEnumerable<Transport> ListTransportsByCountry(string Country)
+		{
+			// must study how to use .Where() with .ThenInclude().
+			return _context.Transport
+				.Include(t => t.StationPassings)
+				.ThenInclude(sp => sp.Station).ToList();
+//				.Where(sp => ).ToList();
+		}
 
 		public bool TransportExists(int id)
 		{
