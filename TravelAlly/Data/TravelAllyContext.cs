@@ -179,6 +179,7 @@ namespace TravelAlly.Data
 				{
 					Id = 1,
 					Name = "St. Pancras International",
+					Code = "SPX",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.53,
 					Lon = -0.125278,
@@ -197,6 +198,7 @@ namespace TravelAlly.Data
 				{
 					Id = 5,
 					Name = "Basingstoke Railway Station",
+					Code = "BSK",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.26842,
 					Lon = -1.08857,
@@ -206,6 +208,7 @@ namespace TravelAlly.Data
 				{
 					Id = 4,
 					Name = "Woking Railway Station",
+					Code = "WOK",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.31903,
 					Lon = -0.55598,
@@ -215,6 +218,7 @@ namespace TravelAlly.Data
 				{
 					Id = 3,
 					Name = "London Waterloo",
+					Code = "WAT",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.5031,
 					Lon = -0.1132,
@@ -224,6 +228,7 @@ namespace TravelAlly.Data
 				{
 					Id = 6,
 					Name = "Exeter St. Davids",
+					Code = "EXD",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 50.7292155,
 					Lon = -3.5435703,
@@ -233,6 +238,7 @@ namespace TravelAlly.Data
 				{
 					Id = 20,
 					Name = "Exeter Central",
+					Code = "EXC",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 50.7270161,
 					Lon = -3.5321297,
@@ -242,7 +248,8 @@ namespace TravelAlly.Data
 				{
 					Id = 7,
 					Name = "Pinhoe Railway Station",
-					AcceptsTypes = TransportType.RAILWAY,
+					Code = "PIN",
+                    AcceptsTypes = TransportType.RAILWAY,
 					Lat = 50.73779,
 					Lon = -3.47008,
 					CityId = 6
@@ -251,7 +258,8 @@ namespace TravelAlly.Data
 				{
 					Id = 8,
 					Name = "Cranbrook Station",
-					AcceptsTypes = TransportType.RAILWAY,
+                    Code = "CBK",
+                    AcceptsTypes = TransportType.RAILWAY,
 					Lat = 50.75001,
 					Lon = -3.42097,
 					CityId = 7
@@ -260,7 +268,8 @@ namespace TravelAlly.Data
 				{
 					Id = 9,
 					Name = "Honiton Railway Station",
-					AcceptsTypes = TransportType.RAILWAY,
+					Code = "HON",
+                    AcceptsTypes = TransportType.RAILWAY,
 					Lat = 50.79672,
 					Lon = -3.1869,
 					CityId = 8
@@ -269,6 +278,7 @@ namespace TravelAlly.Data
 				{
 					Id = 10,
 					Name = "Axminster Railway Station",
+                    Code = "AXM",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 50.77901,
 					Lon = -3.00495,
@@ -278,7 +288,8 @@ namespace TravelAlly.Data
 				{
 					Id = 11,
 					Name = "Crewkerne Railway Station",
-					AcceptsTypes = TransportType.RAILWAY,
+                    Code = "CKN",
+                    AcceptsTypes = TransportType.RAILWAY,
 					Lat = 50.87357,
 					Lon = -2.77844,
 					CityId = 10
@@ -287,6 +298,7 @@ namespace TravelAlly.Data
 				{
 					Id = 12,
 					Name = "Yeovil Junction",
+                    Code = "YVJ",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 50.92479,
 					Lon = -2.61226,
@@ -296,6 +308,7 @@ namespace TravelAlly.Data
 				{
 					Id = 13,
 					Name = "Sherborne Railway Station",
+                    Code = "SHE",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 50.9439790,
 					Lon = -2.5129696,
@@ -305,6 +318,7 @@ namespace TravelAlly.Data
 				{
 					Id = 14,
 					Name = "Templecombe Railway Station",
+                    Code = "TMC",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.00159,
 					Lon = -2.41728,
@@ -314,6 +328,7 @@ namespace TravelAlly.Data
 				{
 					Id = 15,
 					Name = "Gillingham Railway Station",
+                    Code = "GIL",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.03409,
 					Lon = -2.27208,
@@ -323,6 +338,7 @@ namespace TravelAlly.Data
 				{
 					Id = 16,
 					Name = "Tisbury Railway Station",
+                    Code = "TIS",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.061,
 					Lon = -2.07879,
@@ -332,6 +348,7 @@ namespace TravelAlly.Data
 				{
 					Id = 17,
 					Name = "Salisbury Railway Station",
+                    Code = "SAL",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.07055,
 					Lon = -1.80645,
@@ -341,6 +358,7 @@ namespace TravelAlly.Data
 				{
 					Id = 18,
 					Name = "Andover Railway Station",
+                    Code = "ADV",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.21155,
 					Lon = -1.49277,
@@ -350,6 +368,7 @@ namespace TravelAlly.Data
 				{
 					Id = 19,
 					Name = "Clapham Junction",
+                    Code = "CLJ",
 					AcceptsTypes = TransportType.RAILWAY,
 					Lat = 51.4644589,
 					Lon = -0.1705184,

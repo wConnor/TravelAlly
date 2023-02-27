@@ -219,6 +219,9 @@ namespace TravelAlly.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Lat")
                         .HasColumnType("float");
 
@@ -240,6 +243,7 @@ namespace TravelAlly.Migrations
                             Id = 1,
                             AcceptsTypes = 1,
                             CityId = 1,
+                            Code = "SPX",
                             Lat = 51.530000000000001,
                             Lon = -0.125278,
                             Name = "St. Pancras International"
@@ -258,6 +262,7 @@ namespace TravelAlly.Migrations
                             Id = 5,
                             AcceptsTypes = 1,
                             CityId = 4,
+                            Code = "BSK",
                             Lat = 51.268419999999999,
                             Lon = -1.08857,
                             Name = "Basingstoke Railway Station"
@@ -267,6 +272,7 @@ namespace TravelAlly.Migrations
                             Id = 4,
                             AcceptsTypes = 1,
                             CityId = 3,
+                            Code = "WOK",
                             Lat = 51.319029999999998,
                             Lon = -0.55598000000000003,
                             Name = "Woking Railway Station"
@@ -276,6 +282,7 @@ namespace TravelAlly.Migrations
                             Id = 3,
                             AcceptsTypes = 1,
                             CityId = 1,
+                            Code = "WAT",
                             Lat = 51.503100000000003,
                             Lon = -0.1132,
                             Name = "London Waterloo"
@@ -285,6 +292,7 @@ namespace TravelAlly.Migrations
                             Id = 6,
                             AcceptsTypes = 1,
                             CityId = 5,
+                            Code = "EXD",
                             Lat = 50.729215500000002,
                             Lon = -3.5435702999999998,
                             Name = "Exeter St. Davids"
@@ -294,6 +302,7 @@ namespace TravelAlly.Migrations
                             Id = 20,
                             AcceptsTypes = 1,
                             CityId = 5,
+                            Code = "EXC",
                             Lat = 50.7270161,
                             Lon = -3.5321297,
                             Name = "Exeter Central"
@@ -303,6 +312,7 @@ namespace TravelAlly.Migrations
                             Id = 7,
                             AcceptsTypes = 1,
                             CityId = 6,
+                            Code = "PIN",
                             Lat = 50.737789999999997,
                             Lon = -3.4700799999999998,
                             Name = "Pinhoe Railway Station"
@@ -312,6 +322,7 @@ namespace TravelAlly.Migrations
                             Id = 8,
                             AcceptsTypes = 1,
                             CityId = 7,
+                            Code = "CBK",
                             Lat = 50.750010000000003,
                             Lon = -3.4209700000000001,
                             Name = "Cranbrook Station"
@@ -321,6 +332,7 @@ namespace TravelAlly.Migrations
                             Id = 9,
                             AcceptsTypes = 1,
                             CityId = 8,
+                            Code = "HON",
                             Lat = 50.796720000000001,
                             Lon = -3.1869000000000001,
                             Name = "Honiton Railway Station"
@@ -330,6 +342,7 @@ namespace TravelAlly.Migrations
                             Id = 10,
                             AcceptsTypes = 1,
                             CityId = 9,
+                            Code = "AXM",
                             Lat = 50.77901,
                             Lon = -3.00495,
                             Name = "Axminster Railway Station"
@@ -339,6 +352,7 @@ namespace TravelAlly.Migrations
                             Id = 11,
                             AcceptsTypes = 1,
                             CityId = 10,
+                            Code = "CKN",
                             Lat = 50.873570000000001,
                             Lon = -2.7784399999999998,
                             Name = "Crewkerne Railway Station"
@@ -348,6 +362,7 @@ namespace TravelAlly.Migrations
                             Id = 12,
                             AcceptsTypes = 1,
                             CityId = 11,
+                            Code = "YVJ",
                             Lat = 50.924790000000002,
                             Lon = -2.61226,
                             Name = "Yeovil Junction"
@@ -357,6 +372,7 @@ namespace TravelAlly.Migrations
                             Id = 13,
                             AcceptsTypes = 1,
                             CityId = 12,
+                            Code = "SHE",
                             Lat = 50.943978999999999,
                             Lon = -2.5129695999999999,
                             Name = "Sherborne Railway Station"
@@ -366,6 +382,7 @@ namespace TravelAlly.Migrations
                             Id = 14,
                             AcceptsTypes = 1,
                             CityId = 13,
+                            Code = "TMC",
                             Lat = 51.00159,
                             Lon = -2.4172799999999999,
                             Name = "Templecombe Railway Station"
@@ -375,6 +392,7 @@ namespace TravelAlly.Migrations
                             Id = 15,
                             AcceptsTypes = 1,
                             CityId = 14,
+                            Code = "GIL",
                             Lat = 51.034089999999999,
                             Lon = -2.2720799999999999,
                             Name = "Gillingham Railway Station"
@@ -384,6 +402,7 @@ namespace TravelAlly.Migrations
                             Id = 16,
                             AcceptsTypes = 1,
                             CityId = 15,
+                            Code = "TIS",
                             Lat = 51.061,
                             Lon = -2.0787900000000001,
                             Name = "Tisbury Railway Station"
@@ -393,6 +412,7 @@ namespace TravelAlly.Migrations
                             Id = 17,
                             AcceptsTypes = 1,
                             CityId = 16,
+                            Code = "SAL",
                             Lat = 51.070549999999997,
                             Lon = -1.8064499999999999,
                             Name = "Salisbury Railway Station"
@@ -402,6 +422,7 @@ namespace TravelAlly.Migrations
                             Id = 18,
                             AcceptsTypes = 1,
                             CityId = 17,
+                            Code = "ADV",
                             Lat = 51.211550000000003,
                             Lon = -1.4927699999999999,
                             Name = "Andover Railway Station"
@@ -411,6 +432,7 @@ namespace TravelAlly.Migrations
                             Id = 19,
                             AcceptsTypes = 1,
                             CityId = 1,
+                            Code = "CLJ",
                             Lat = 51.464458899999997,
                             Lon = -0.17051839999999999,
                             Name = "Clapham Junction"

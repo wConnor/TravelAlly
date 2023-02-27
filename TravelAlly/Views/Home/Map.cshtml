@@ -25,7 +25,7 @@
 			{
 				<text>
 				var	marker = L.marker([@item.Lat, @item.Lon]).addTo(map);
-				marker.bindPopup("<b>@item.Name</b>\
+				marker.bindPopup("<b>@item.Name</b> (@item.Code)\
 				<br><b>Accepts Transport</b>: @item.AcceptsTypes\
 				<br><b>Coordinates</b>:	@item.Lat, @item.Lon\
 				<br>@item.City.Country,	@item.City.Continent");
@@ -50,12 +50,13 @@
 				<text>
 				var	polyLine = L.polyline(points);
 				polyLine.bindPopup("<b>@item.Carrier</b><br>\
-				<b>Route Code</b>: @item.RouteCode<br>\
-				<b>Transport Type</b>: @item.Type<br>\
-				<b>Route Type</b>: @item.RouteType<br>\
-				<b>Operates	on Days</b>: @item.OperatesOnDays<br>\
-				<b>Origin</b>: @item.StationPassings[0].Station.Name<br>\
-				<b>Destination</b>:	@item.StationPassings[item.StationPassings.Count-1].Station.Name");
+								<b>Route Code</b>: @item.RouteCode<br>\
+								<b>Transport Type</b>: @item.Type<br>\
+								<b>Route Type</b>: @item.RouteType<br>\
+								<b>Operates on Days</b>: @item.OperatesOnDays<br>\
+								<b>Origin</b>: @item.StationPassings[0].Station.Name (@item.StationPassings[0].DepartureTime)<br>\
+								<b>Destination</b>: @item.StationPassings[item.StationPassings.Count-1].Station.Name\
+								(@item.StationPassings[item.StationPassings.Count-1].ArrivalTime");
 
 				polyLine.addTo(map);
 				points.length = 0;

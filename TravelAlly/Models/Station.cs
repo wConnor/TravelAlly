@@ -6,10 +6,11 @@ namespace TravelAlly.Models
 	public class Station
 	{
 		public Station() { }
-		public Station(int id, string? name, TransportType acceptsTypes, double lat, double lon, int cityId, City? city)
+		public Station(int id, string? name, string? code, TransportType acceptsTypes, double lat, double lon, int cityId, City? city)
 		{
 			Id = id;
 			Name = name;
+			Code = code;
 			AcceptsTypes = acceptsTypes;
 			Lat = lat;
 			Lon = lon;
@@ -20,6 +21,8 @@ namespace TravelAlly.Models
 		[Key]
 		public int Id { get; set; }
 		public String? Name { get; set; }
+		[DisplayName("Station Code")]
+		public string? Code { get; set; }
 		[DisplayName("Accepts Transport Types")]
 		public TransportType AcceptsTypes { get; set; }
 		[DisplayName("Latitude")]

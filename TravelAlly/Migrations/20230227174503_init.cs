@@ -50,6 +50,7 @@ namespace TravelAlly.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AcceptsTypes = table.Column<int>(type: "int", nullable: false),
                     Lat = table.Column<double>(type: "float", nullable: false),
                     Lon = table.Column<double>(type: "float", nullable: false),
@@ -130,29 +131,29 @@ namespace TravelAlly.Migrations
 
             migrationBuilder.InsertData(
                 table: "Station",
-                columns: new[] { "Id", "AcceptsTypes", "CityId", "Lat", "Lon", "Name" },
+                columns: new[] { "Id", "AcceptsTypes", "CityId", "Code", "Lat", "Lon", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, 51.530000000000001, -0.125278, "St. Pancras International" },
-                    { 2, 1, 2, 48.881110999999997, 2.3552780000000002, "Gare du Nord" },
-                    { 3, 1, 1, 51.503100000000003, -0.1132, "London Waterloo" },
-                    { 4, 1, 3, 51.319029999999998, -0.55598000000000003, "Woking Railway Station" },
-                    { 5, 1, 4, 51.268419999999999, -1.08857, "Basingstoke Railway Station" },
-                    { 6, 1, 5, 50.729215500000002, -3.5435702999999998, "Exeter St. Davids" },
-                    { 7, 1, 6, 50.737789999999997, -3.4700799999999998, "Pinhoe Railway Station" },
-                    { 8, 1, 7, 50.750010000000003, -3.4209700000000001, "Cranbrook Station" },
-                    { 9, 1, 8, 50.796720000000001, -3.1869000000000001, "Honiton Railway Station" },
-                    { 10, 1, 9, 50.77901, -3.00495, "Axminster Railway Station" },
-                    { 11, 1, 10, 50.873570000000001, -2.7784399999999998, "Crewkerne Railway Station" },
-                    { 12, 1, 11, 50.924790000000002, -2.61226, "Yeovil Junction" },
-                    { 13, 1, 12, 50.943978999999999, -2.5129695999999999, "Sherborne Railway Station" },
-                    { 14, 1, 13, 51.00159, -2.4172799999999999, "Templecombe Railway Station" },
-                    { 15, 1, 14, 51.034089999999999, -2.2720799999999999, "Gillingham Railway Station" },
-                    { 16, 1, 15, 51.061, -2.0787900000000001, "Tisbury Railway Station" },
-                    { 17, 1, 16, 51.070549999999997, -1.8064499999999999, "Salisbury Railway Station" },
-                    { 18, 1, 17, 51.211550000000003, -1.4927699999999999, "Andover Railway Station" },
-                    { 19, 1, 1, 51.464458899999997, -0.17051839999999999, "Clapham Junction" },
-                    { 20, 1, 5, 50.7270161, -3.5321297, "Exeter Central" }
+                    { 1, 1, 1, "SPX", 51.530000000000001, -0.125278, "St. Pancras International" },
+                    { 2, 1, 2, null, 48.881110999999997, 2.3552780000000002, "Gare du Nord" },
+                    { 3, 1, 1, "WAT", 51.503100000000003, -0.1132, "London Waterloo" },
+                    { 4, 1, 3, "WOK", 51.319029999999998, -0.55598000000000003, "Woking Railway Station" },
+                    { 5, 1, 4, "BSK", 51.268419999999999, -1.08857, "Basingstoke Railway Station" },
+                    { 6, 1, 5, "EXD", 50.729215500000002, -3.5435702999999998, "Exeter St. Davids" },
+                    { 7, 1, 6, "PIN", 50.737789999999997, -3.4700799999999998, "Pinhoe Railway Station" },
+                    { 8, 1, 7, "CBK", 50.750010000000003, -3.4209700000000001, "Cranbrook Station" },
+                    { 9, 1, 8, "HON", 50.796720000000001, -3.1869000000000001, "Honiton Railway Station" },
+                    { 10, 1, 9, "AXM", 50.77901, -3.00495, "Axminster Railway Station" },
+                    { 11, 1, 10, "CKN", 50.873570000000001, -2.7784399999999998, "Crewkerne Railway Station" },
+                    { 12, 1, 11, "YVJ", 50.924790000000002, -2.61226, "Yeovil Junction" },
+                    { 13, 1, 12, "SHE", 50.943978999999999, -2.5129695999999999, "Sherborne Railway Station" },
+                    { 14, 1, 13, "TMC", 51.00159, -2.4172799999999999, "Templecombe Railway Station" },
+                    { 15, 1, 14, "GIL", 51.034089999999999, -2.2720799999999999, "Gillingham Railway Station" },
+                    { 16, 1, 15, "TIS", 51.061, -2.0787900000000001, "Tisbury Railway Station" },
+                    { 17, 1, 16, "SAL", 51.070549999999997, -1.8064499999999999, "Salisbury Railway Station" },
+                    { 18, 1, 17, "ADV", 51.211550000000003, -1.4927699999999999, "Andover Railway Station" },
+                    { 19, 1, 1, "CLJ", 51.464458899999997, -0.17051839999999999, "Clapham Junction" },
+                    { 20, 1, 5, "EXC", 50.7270161, -3.5321297, "Exeter Central" }
                 });
 
             migrationBuilder.InsertData(
