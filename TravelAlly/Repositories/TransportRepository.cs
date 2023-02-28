@@ -35,6 +35,7 @@ namespace TravelAlly.Repositories
 			return _context.Transport
                 .Include(t => t.StationPassings)
                 .ThenInclude(sp => sp.Station)
+				.ThenInclude(s => s.City)
 				.FirstOrDefault(m => m.Id == id);
 		}
 
@@ -64,14 +65,16 @@ namespace TravelAlly.Repositories
 		{
 			return _context.Transport
 				.Include(t => t.StationPassings)
-				.ThenInclude(sp => sp.Station).ToList();
+				.ThenInclude(sp => sp.Station)
+				.ThenInclude(s => s.City).ToList();
 		}
 		public IEnumerable<Transport> ListTransportsByCountry(string Country)
 		{
 			// must study how to use .Where() with .ThenInclude().
 			return _context.Transport
 				.Include(t => t.StationPassings)
-				.ThenInclude(sp => sp.Station).ToList();
+				.ThenInclude(sp => sp.Station)
+				.ThenInclude(s => s.City).ToList();
 //				.Where(sp => ).ToList();
 		}
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using TravelAlly.Models;
 using TravelAlly.Services;
 using TravelAlly.ViewModels;
 
@@ -24,10 +26,20 @@ namespace TravelAlly.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> FindRoute([Bind("Origin,Destination")] RoutePlannerRequestViewModel ViewModel)
+		public async Task<IActionResult> FindRoute([Bind("Origin,Destination,DepartureTime")] RoutePlannerRequestViewModel ViewModel)
 		{
-			_service.CalculateRoutes(ViewModel.Origin, ViewModel.Destination);
-			return NotFound();
+			if (ViewModel.Origin == ViewModel.Destination)
+			{
+				return NotFound();				
+			}
+
+			RoutePlannerResultViewModel	ResultViewModel	= new RoutePlannerResultViewModel();
+			ResultViewModel.Transport = _service.CalculateRoutes(ViewModel.Origin, ViewModel.Destination, ViewModel.DepartureTime);
+			ResultViewModel.OriginCityName = ViewModel.Origin;
+			ResultViewModel.DestinationCityName = ViewModel.Destination;
+			ResultViewModel.DepartureTime = ViewModel.DepartureTime;
+
+			return View(ResultViewModel);
 		}
 	}
 }
