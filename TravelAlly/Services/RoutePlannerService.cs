@@ -21,8 +21,7 @@ namespace TravelAlly.Services
             return _cityRepository.ListCityNames();
         }
 
-        // Will be changed to IEnumerable<Transport> once transfers are added.
-        public Transport CalculateRoutes(string OriginCity, string DestinationCity, DateTime DepartureDateTime)
+        public List<Transport> CalculateRoutes(string OriginCity, string DestinationCity, DateTime DepartureDateTime)
         {
             List<Station> OriginStations = _stationRepository.ListStationsByCity(OriginCity).ToList();
             List<Station> DestinationStations = _stationRepository.ListStationsByCity(DestinationCity).ToList();
@@ -31,7 +30,7 @@ namespace TravelAlly.Services
 			City OriginCityObject = _cityRepository.GetCityByName(OriginCity);
 			City DestinationCityObject = _cityRepository.GetCityByName(DestinationCity);
 
-			Transport CalculatedRoute = null;
+			List<Transport> EligibleRoutes = new List<Transport>();
 
 			// Domestic route
 			if (OriginCityObject.Country ==	DestinationCityObject.Country)
@@ -57,19 +56,19 @@ namespace TravelAlly.Services
 
                         if (OriginFound && DestinationFound)
                         {
-                            RouteFound = true;
-                            CalculatedRoute = r;
+                            EligibleRoutes.Add(r);
                             break;
                         }
                     }
-                    if (RouteFound)
-                    {
-                        break;
-                    }
                 }
             }
+            // International Route
+            else
+            {
 
-            return CalculatedRoute;
+            }
+
+            return EligibleRoutes;
         }
     }
 }

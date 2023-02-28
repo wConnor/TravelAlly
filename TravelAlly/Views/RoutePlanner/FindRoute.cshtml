@@ -11,44 +11,47 @@
 <body>
 	<h2>Find Route</h2>
 	<p>Travelling from <b>@Model.OriginCityName</b> to <b>@Model.DestinationCityName</b>, leaving at @Model.DepartureTime.</p>
-	@if (Model != null)
+	@if (Model.Routes.Count > 0)
 	{
-		<h3>Route(s) Found</h3>
-		<h4>@Model.Transport.StationPassings[0].DepartureTime <b>@Model.Transport.StationPassings[0].Station.Name</b> -->  @Model.Transport.StationPassings[Model.Transport.StationPassings.Count-1].ArrivalTime <b>@Model.Transport.StationPassings[Model.Transport.StationPassings.Count-1].Station.Name</b></h4>
+		<h3>@Model.Routes.Count Route(s) Found</h3>
+		@foreach (var rt in Model.Routes)
+		{
+			<h4>@rt.StationPassings[0].DepartureTime <b>@rt.StationPassings[0].Station.Name</b> --> @rt.StationPassings[rt.StationPassings.Count-1].ArrivalTime <b>@rt.StationPassings[rt.StationPassings.Count-1].Station.Name</b></h4>
 
-		<table>
-			@foreach (var sp in Model.Transport.StationPassings)
-			{
-				<tr>
-					@if (sp.Station.City.Name == Model.OriginCityName || sp.Station.City.Name == Model.DestinationCityName)
-					{
-						<th style="font-weight:	bold;">@sp.Station.Name</th>
-					}
-					else
-					{
-						<th style="font-weight:	normal;">@sp.Station.Name</th>
-					}
+			<table>
+				@foreach (var sp in rt.StationPassings)
+				{
+					<tr>
+						@if (sp.Station.City.Name == Model.OriginCityName || sp.Station.City.Name == Model.DestinationCityName)
+						{
+							<th style="font-weight:	bold;">@sp.Station.Name</th>
+						}
+						else
+						{
+							<th style="font-weight:	normal;">@sp.Station.Name</th>
+						}
 
-					@if (sp.ArrivalTime == null)
-					{
-						<th>[<i> START </i>] :</th>
-					}
-					else
-					{
-						<th>@sp.ArrivalTime.Value.ToString("HH:mm")	: </th>
-					}
+						@if (sp.ArrivalTime == null)
+						{
+							<th>[<i> START </i>] :</th>
+						}
+						else
+						{
+							<th>@sp.ArrivalTime.Value.ToString("HH:mm")	: </th>
+						}
 
-					@if (sp.DepartureTime == null)
-					{
-						<th>[<i> TERMINATES </i>]</th>
-					}
-					else
-					{
-						<th>@sp.DepartureTime.Value.ToString("HH:mm") </th>
-					}
-				</tr>
-			}
-		</table>
+						@if (sp.DepartureTime == null)
+						{
+							<th>[<i> TERMINATES </i>]</th>
+						}
+						else
+						{
+							<th>@sp.DepartureTime.Value.ToString("HH:mm") </th>
+						}
+					</tr>
+				}
+			</table>
+		}
 	}
 	else
 	{

@@ -30,11 +30,14 @@ namespace TravelAlly.Controllers
 		{
 			if (ViewModel.Origin == ViewModel.Destination)
 			{
-				return NotFound();				
+				// Find means to return to Index page with an error message
+				// (can be added to Request ViewModel).
+				// return Index(); doesn't work.
+				return NotFound();
 			}
 
 			RoutePlannerResultViewModel	ResultViewModel	= new RoutePlannerResultViewModel();
-			ResultViewModel.Transport = _service.CalculateRoutes(ViewModel.Origin, ViewModel.Destination, ViewModel.DepartureTime);
+			ResultViewModel.Routes = _service.CalculateRoutes(ViewModel.Origin, ViewModel.Destination, ViewModel.DepartureTime);
 			ResultViewModel.OriginCityName = ViewModel.Origin;
 			ResultViewModel.DestinationCityName = ViewModel.Destination;
 			ResultViewModel.DepartureTime = ViewModel.DepartureTime;

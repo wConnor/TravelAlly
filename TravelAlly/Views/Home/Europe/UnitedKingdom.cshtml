@@ -94,10 +94,10 @@
 				<b>Route Code</b>: @item.RouteCode<br>\
 				<b>Transport Type</b>: @item.Type<br>\
 				<b>Route Type</b>: @item.RouteType<br>\
-				<b>Operates on Days</b>: @item.OperatesOnDays<br>\
-				<b>Origin</b>: @item.StationPassings[0].Station.Name (@item.StationPassings[0].DepartureTime)<br>\
-				<b>Destination</b>: @item.StationPassings[item.StationPassings.Count-1].Station.Name\
-				(@item.StationPassings[item.StationPassings.Count-1].ArrivalTime)");
+				<b>Operates	on Days</b>: @item.OperatesOnDays<br>\
+				<b>Origin</b>: @item.StationPassings[0].Station.Name (@item.StationPassings[0].DepartureTime.Value.ToString("HH:mm"))<br>\
+				<b>Destination</b>:	@item.StationPassings[item.StationPassings.Count-1].Station.Name\
+				(@item.StationPassings[item.StationPassings.Count-1].ArrivalTime.Value.ToString("HH:mm"))");
 
 				polyLine.addTo(map);
 				points.length = 0;
