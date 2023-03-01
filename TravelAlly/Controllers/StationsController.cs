@@ -64,6 +64,11 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Name,AcceptsTypes,Lat,Lon,CityName")] CreateStationViewModel csvm)
 		{
+			if (!User.Identity.IsAuthenticated)
+			{
+				return RedirectToAction(nameof(Index));				
+			}
+
 			Station Station = new Station();
 			Station.Name = csvm.Name;
 			Station.AcceptsTypes = csvm.AcceptsTypes;

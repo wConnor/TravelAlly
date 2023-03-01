@@ -19,16 +19,25 @@
 			<h4>@rt.StationPassings[0].DepartureTime <b>@rt.StationPassings[0].Station.Name</b> --> @rt.StationPassings[rt.StationPassings.Count-1].ArrivalTime <b>@rt.StationPassings[rt.StationPassings.Count-1].Station.Name</b></h4>
 
 			<table>
+				<tr>
+					<th>Station</th>
+					<th>Arrival</th>
+					<th>Departure</th>
+				</tr>
 				@foreach (var sp in rt.StationPassings)
 				{
 					<tr>
-						@if (sp.Station.City.Name == Model.OriginCityName || sp.Station.City.Name == Model.DestinationCityName)
+						@if (sp.Station.City.Name == Model.OriginCityName)
 						{
-							<th style="font-weight:	bold;">@sp.Station.Name</th>
+							<th style="font-weight: normal;"><b>(Start)</b> @sp.Station.Name</th>
+						}
+						else if (sp.Station.City.Name == Model.DestinationCityName)
+						{
+							<th style="font-weight: normal;"><b>(End)</b> @sp.Station.Name</th>
 						}
 						else
 						{
-							<th style="font-weight:	normal;">@sp.Station.Name</th>
+							<th style="font-weight: normal;">@sp.Station.Name</th>
 						}
 
 						@if (sp.ArrivalTime == null)

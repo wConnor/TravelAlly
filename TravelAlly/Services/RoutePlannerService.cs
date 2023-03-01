@@ -37,12 +37,10 @@ namespace TravelAlly.Services
             {
                 List<Transport> CountryRoutes = _transportRepository.ListTransportsByCountry(OriginCityObject.Country).ToList();
 
-                bool RouteFound = false;
-
                 foreach (var r in CountryRoutes)
                 {
-                    bool OriginFound = false, DestinationFound = false;
-                    foreach (var sp in r.StationPassings)
+					bool OriginFound = false, DestinationFound = false;
+					foreach (var sp in r.StationPassings)
                     {
                         if (sp.Station.City == OriginCityObject)
                         {
@@ -61,11 +59,47 @@ namespace TravelAlly.Services
                         }
                     }
                 }
+
+                // No direct route found - attempt with transfers.
+                if (EligibleRoutes.Count == 0)
+                {
+
+                }
             }
             // International Route
             else
             {
+                // Attempt to find a direct route between the two countries.
+                List<Transport> InternationalRotues = _transportRepository.ListTransportsByCountry(OriginCityObject.Country).ToList();
 
+                foreach (var r in InternationalRotues)
+                {
+					bool OriginFound = false, DestinationFound = false;
+					foreach (var sp in r.StationPassings)
+                    {
+						if (sp.Station.City == OriginCityObject)
+						{
+							OriginFound = true;
+						}
+
+						if (sp.Station.City == DestinationCityObject && OriginFound)
+						{
+							DestinationFound = true;
+						}
+
+						if (OriginFound && DestinationFound)
+						{
+							EligibleRoutes.Add(r);
+							break;
+						}
+                    }
+                }
+
+                // No direct route found - attempt with transfers possibly crossing country borders.
+                if (EligibleRoutes.Count == 0)
+                {
+
+                }
             }
 
             return EligibleRoutes;
