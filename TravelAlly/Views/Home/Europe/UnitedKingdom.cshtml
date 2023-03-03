@@ -1,110 +1,130 @@
 ﻿@model TravelAlly.ViewModels.MapOutputViewModel
 
 @{
-	ViewData["Title"] = "United Kingdom";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "United Kingdom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 </head>
 <body>
-	<h2>United Kingdom</h2>
-	<p>Looking for London-specific travel advice? Visit the <a asp-controller="Home" asp-action="London">London</a> page.</p>
-	<h3>Train</h3>
-	<p>With the United Kingdom being a fairly small country, you will find yourself able to mostly rely on travelling by train. Smaller towns and villages may not have a railway station, but you will be able to take a train to a larger town in the area and then use local bus services to reach your destination. Strike action is fairly frequent, so be sure to check <a href="https://www.nationalrail.co.uk">NationalRail</a> for the latest updates.</p>
-	<p>It is also possible to travel to France, Belgium, and the Netherlands from London by train using the Eurostar.</p>
-	<h4>Purchasing Tickets</h4>
-	<h5>Online</h5>
-	<p>Tickets can be purchased online via a variety of services, but the most popular would be <a href="https://www.nationalrail.co.uk">NationalRail</a> and <a href="https://www.thetrainline.com">Trainline</a> (+£1.00 booking fee). Purchasing from these websites should provide you with your ticket in either a PDF format or some other means to show via. an app or Google / Apple wallet. When asked by a ticket inspector on-board, simply show them the QR code which they will then scan with the device that they carry.</p>
-	<h5>In-Person</h5>
-	<p>One can also purchase tickets in-person from both ticket booths and ticket machines if they so desire.</p>
-	<h5>Ticket Types</h5>
-	<p>There are a variety of different types of tickets that affect the trains that you can board and the price that you pay. They are as follows:</p>
-	<ul>
-		<li><b>Advance</b>: A ticket that has been purchased in-advance for a specific journey. This ticket can only be purchased online. The carrier is only able to board the specific train stated on the ticket; not the one before nor after. These are the best-value tickets that can get, though they are <b>not</b> refundable, and missing the specified train will require the purchase of another, likely expensive ticket. In the event of the train being cancelled, the ticket will be valid for the next one. If a delay were to cause the carrier to miss their connecting train, then the ticket inspectors are fairly understanding and will allow them to board.</li>
-		<li>
-			<b>Off-Peak</b>: A ticket that allows the carrier to travel on any train on a certain route during off-peak hours. Unlike an advance ticket, the carrier can simply board any train that their ticket is valid on; not just a single one. There are two main categories of off-peak train times, and these are as follows:
-			<ul>
-				<li><b>Intercity</b>: Monday to Friday, 09:30 to 16:00, and then after 19:00.</li>
-				<li><b>Transport for London (TFL)</b>: Monday to Friday from the first service 06:30, from 09:30 to 16:00, and then after 19:00.</li>
-			</ul>
-		<li><b>Anytime</b>: A ticket that allows the carrier to travel at anytime, regardless of whether or not it is currently peak or off-peak hours. These tickets are typically the most expensive, and their high prices can typically be avoided by purchasing in-advance.</li>
-		<li><b>Season</b>: A specialised ticket that allows the carrier unlimited travel between two stations for a specific period of time. Typically not used by travellers due to its high price and makes more sense for commuters.
-	</ul>
-	<p><b>Off-Peak</b> and <b>Anytime</b> tickets offer a 'Return' ticket type, which allows the traveller to go from one station to another and back. These tickets typically offer better value than having two single tickets. Advance tickets do <b>not</b> have a return option and must be purchased as two singles.</p>
-	<h5>Railcard</h5>
-	<p>The railcard allows its carrier to save 33% off of their train journeys and costs £30 per year, or £70 for three years. Not everyone is eligible for a railcard - one is required to be a UK citizen and fall under a certain group, such as being between the ages of 16 and 25, and being a senior. You can find out more at <a href="https://www.railcard.co.uk/about-railcards/">https://www.railcard.co.uk/about-railcards/</a>. If you are eligible, it is absolutely recommended that you take advantage of it as it pays itself off very quickly, sometimes in a single journey. The railcard is not valid for Eurostar journeys. There are ways to get a free railcard, such as opening a student current account with Santander.</p>
-	<h5>Most Economical Method</h5>
-	<p>Train travel is fairly expensive in the United Kingdom. The absolute best way to get the most out of your money is to purchase tickets online and well in-advance - a week minimum, but no longer than a month.</p>
+    <h2>United Kingdom</h2>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="EditSection" asp-controller="Home" asp-route-page="unitedkingdom" asp-route-section="country">Edit</a>
+    }
+    <div id="country">
+        <p>Looking for London-specific travel advice? Visit the <a asp-controller="Home" asp-action="London">London</a> page.</p>
+    </div>
 
-	<h3>Coach</h3>
+    <h3>Train</h3>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="EditSection" asp-controller="Home" asp-route-page="unitedkingdom" asp-route-section="train">Edit</a>
+    }
+    <div id="train">
+        <p>With the United Kingdom being a fairly small country, you will find yourself able to mostly rely on travelling by train. Smaller towns and villages may not have a railway station, but you will be able to take a train to a larger town in the area and then use local bus services to reach your destination. Strike action is fairly frequent, so be sure to check <a href="https://www.nationalrail.co.uk">NationalRail</a> for the latest updates.</p>
+        <p>It is also possible to travel to France, Belgium, and the Netherlands from London by train using the Eurostar.</p>
+        <h4>Purchasing Tickets</h4>
+        <h5>Online</h5>
+        <p>Tickets can be purchased online via a variety of services, but the most popular would be <a href="https://www.nationalrail.co.uk">NationalRail</a> and <a href="https://www.thetrainline.com">Trainline</a> (+£1.00 booking fee). Purchasing from these websites should provide you with your ticket in either a PDF format or some other means to show via. an app or Google / Apple wallet. When asked by a ticket inspector on-board, simply show them the QR code which they will then scan with the device that they carry.</p>
+        <h5>In-Person</h5>
+        <p>One can also purchase tickets in-person from both ticket booths and ticket machines if they so desire.</p>
+        <h5>Ticket Types</h5>
+        <p>There are a variety of different types of tickets that affect the trains that you can board and the price that you pay. They are as follows:</p>
+        <ul>
+            <li><b>Advance</b>: A ticket that has been purchased in-advance for a specific journey. This ticket can only be purchased online. The carrier is only able to board the specific train stated on the ticket; not the one before nor after. These are the best-value tickets that can get, though they are <b>not</b> refundable, and missing the specified train will require the purchase of another, likely expensive ticket. In the event of the train being cancelled, the ticket will be valid for the next one. If a delay were to cause the carrier to miss their connecting train, then the ticket inspectors are fairly understanding and will allow them to board.</li>
+            <li>
+                <b>Off-Peak</b>: A ticket that allows the carrier to travel on any train on a certain route during off-peak hours. Unlike an advance ticket, the carrier can simply board any train that their ticket is valid on; not just a single one. There are two main categories of off-peak train times, and these are as follows:
+                <ul>
+                    <li><b>Intercity</b>: Monday to Friday, 09:30 to 16:00, and then after 19:00.</li>
+                    <li><b>Transport for London (TFL)</b>: Monday to Friday from the first service 06:30, from 09:30 to 16:00, and then after 19:00.</li>
+                </ul>
+            <li><b>Anytime</b>: A ticket that allows the carrier to travel at anytime, regardless of whether or not it is currently peak or off-peak hours. These tickets are typically the most expensive, and their high prices can typically be avoided by purchasing in-advance.</li>
+            <li><b>Season</b>: A specialised ticket that allows the carrier unlimited travel between two stations for a specific period of time. Typically not used by travellers due to its high price and makes more sense for commuters.
+        </ul>
+        <p><b>Off-Peak</b> and <b>Anytime</b> tickets offer a 'Return' ticket type, which allows the traveller to go from one station to another and back. These tickets typically offer better value than having two single tickets. Advance tickets do <b>not</b> have a return option and must be purchased as two singles.</p>
+        <h5>Railcard</h5>
+        <p>The railcard allows its carrier to save 33% off of their train journeys and costs £30 per year, or £70 for three years. Not everyone is eligible for a railcard - one is required to be a UK citizen and fall under a certain group, such as being between the ages of 16 and 25, and being a senior. You can find out more at <a href="https://www.railcard.co.uk/about-railcards/">https://www.railcard.co.uk/about-railcards/</a>. If you are eligible, it is absolutely recommended that you take advantage of it as it pays itself off very quickly, sometimes in a single journey. The railcard is not valid for Eurostar journeys. There are ways to get a free railcard, such as opening a student current account with Santander.</p>
+        <h5>Most Economical Method</h5>
+        <p>Train travel can be fairly expensive in the United Kingdom. The absolute best way to get the most out of your money is to purchase tickets online and well in-advance - a week minimum, but no longer than a month.</p>
+    </div>
 
-	<h3>Map</h3>
-	<div id="map">
-		<script type="text/javascript">
-			var map = L.map("map").setView([54.910, -3.432], 6);
-			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-				maxZoom: 19,
-				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-			}).addTo(map);
+    <h3>Coach</h3>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="EditSection" asp-controller="Home" asp-route-page="unitedkingdom" asp-route-section="coach">Edit</a>
+    }
+    <div id="coach">
+    
+    </div>
 
-			@foreach (var item in Model.Stations)
-			{
-				<text>
-				var marker = L.marker([@item.Lat, @item.Lon]).addTo(map);
-				marker.bindPopup("<b>@item.Name</b> (@item.Code)\
-				<br><b>Accepts Transport</b>: @item.AcceptsTypes\
-				<br><b>Coordinates</b>: @item.Lat, @item.Lon\
-				<br>@item.City.Country,	@item.City.Continent");
-				</text>
-			}
+    <h3>Map</h3>
+    <div id="map">
+        <script type="text/javascript">
+            var map = L.map("map").setView([54.910, -3.432], 6);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
 
-			var points = [];
+            @foreach (var item in Model.Stations)
+            {
+                <text>
+                                                var marker = L.marker([@item.Lat, @item.Lon]).addTo(map);
+                marker.bindPopup("<b>@item.Name</b> (@item.Code)\
+                                                <br><b>Accepts Transport</b>: @item.AcceptsTypes\
+                                                <br><b>Coordinates</b>: @item.Lat, @item.Lon\
+                                                <br>@item.City.Country,	@item.City.Continent");
+                </text>
+            }
 
-			@foreach (var item in Model.TransportRoutes)
-			{
-				<text>
-				var points;
-				</text>
+                                    var points = [];
 
-				@foreach (var sp in item.StationPassings)
-				{
-					<text>
-					points.push([@sp.Station.Lat, @sp.Station.Lon]);
-					</text>
-				}
+            @foreach (var item in Model.TransportRoutes)
+            {
+                <text>
+                                                var points;
+                </text>
 
-				@if (item.RouteType == RouteType.DOMESTIC)
-				{
-					<text>
-					var polyLine = L.polyline(points, { color: "blue" });
-					</text>
-				}
-				else
-				{
-					<text>
-					var	polyLine = L.polyline(points, {	color: "red" });
-					</text>
-				}
+                @foreach (var sp in item.StationPassings)
+                {
+                    <text>
+                        points.push([@sp.Station.Lat, @sp.Station.Lon]);
+                    </text>
+                }
 
-				<text>
-				polyLine.bindPopup("<b>@item.Carrier</b><br>\
-				<b>Route Code</b>: @item.RouteCode<br>\
-				<b>Transport Type</b>: @item.Type<br>\
-				<b>Route Type</b>: @item.RouteType<br>\
-				<b>Operates	on Days</b>: @item.OperatesOnDays<br>\
-				<b>Origin</b>: @item.StationPassings[0].Station.Name (@item.StationPassings[0].DepartureTime.Value.ToString("HH:mm"))<br>\
-				<b>Destination</b>:	@item.StationPassings[item.StationPassings.Count-1].Station.Name\
-				(@item.StationPassings[item.StationPassings.Count-1].ArrivalTime.Value.ToString("HH:mm"))");
+                @if (item.RouteType == RouteType.DOMESTIC)
+                {
+                    <text>
+                                                            var polyLine = L.polyline(points, { color: "blue" });
+                    </text>
+                }
+                else
+                {
+                    <text>
+                                                            var polyLine = L.polyline(points, { color: "red" });
+                    </text>
+                }
 
-				polyLine.addTo(map);
-				points.length = 0;
-				</text>
-			}
-		</script>
-	</div>
+                <text>
+                    polyLine.bindPopup("<b>@item.Carrier</b><br>\
+                                                <b>Route Code</b>: @item.RouteCode<br>\
+                                                <b>Transport Type</b>: @item.Type<br>\
+                                                <b>Route Type</b>: @item.RouteType<br>\
+                                                <b>Operates	on Days</b>: @item.OperatesOnDays<br>\
+                                                <b>Origin</b>: @item.StationPassings[0].Station.Name (@item.StationPassings[0].DepartureTime.Value.ToString("HH:mm"))<br>\
+                                                <b>Destination</b>:	@item.StationPassings[item.StationPassings.Count-1].Station.Name\
+                                                (@item.StationPassings[item.StationPassings.Count-1].ArrivalTime.Value.ToString("HH:mm"))");
+
+                polyLine.addTo(map);
+                points.length = 0;
+                </text>
+            }
+        </script>
+    </div>
 
 
 </body>

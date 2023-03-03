@@ -34,7 +34,20 @@ namespace TravelAlly.Controllers
 			return View(ViewModel);
 		}
 
-		public IActionResult Europe()
+		public IActionResult EditSection()
+		{
+			return View();
+		}
+
+		[HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSection(int id)
+        {
+			// implement.
+            return View();
+        }
+
+        public IActionResult Europe()
 		{
 			return View("~/Views/Home/Europe/Index.cshtml");
 		}

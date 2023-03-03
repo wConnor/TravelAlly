@@ -1,0 +1,30 @@
+﻿@model TravelAlly.ViewModels.EditSectionViewModel;
+
+@{
+    ViewData["Title"] = "Edit Section";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+
+</head>
+<body>
+    <h1>Edit Section</h1>
+    <form asp-route="EditSection">
+        <div class="form-group">
+            <label asp-for="Page" class="control-label"></label>
+            <input asp-for="Page" class="form-control" readonly />
+
+            <label asp-for="Section" class="control-label"></label>
+            <input asp-for="Section" class="form-control" />
+
+            <label asp-for="Contents" class="control-label"></label>
+            <input asp-for="Contents" class="form-control" />
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+
