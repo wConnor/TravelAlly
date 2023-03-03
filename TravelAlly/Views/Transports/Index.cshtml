@@ -1,76 +1,82 @@
 ﻿@model IEnumerable<TravelAlly.Models.Transport>
 
 @{
-	ViewData["Title"] = "Index";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Index</h1>
 
 <p>
-	<a asp-action="Create">Create New</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Create">Create New</a>
+    }
 </p>
 <table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.RouteCode)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Type)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Carrier)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.OperatesOnDays)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.RouteType)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.StationPassings)
-			</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model)
-		{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.RouteCode)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Type)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Carrier)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.OperatesOnDays)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.RouteType)
-				</td>
-				<td>
-					<table>
-						@foreach (var sp in item.StationPassings)
-						{
-							<tr>
-								<th style="font-weight: normal;">@Html.DisplayFor(modelItem => sp.Station.Name)</th>
-								<th>@Html.DisplayFor(modelItem => sp.ArrivalTime) : </th>
-								<th>@Html.DisplayFor(modelItem => sp.DepartureTime)</th>
-							</tr>
-						}
-					</table>
-				</td>
-				<td>
-					<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-					<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-					<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-				</td>
-			</tr>
-		}
-	</tbody>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RouteCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Carrier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OperatesOnDays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RouteType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StationPassings)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RouteCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Carrier)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OperatesOnDays)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RouteType)
+                </td>
+                <td>
+                    <table>
+                        @foreach (var sp in item.StationPassings)
+                        {
+                            <tr>
+                                <th style="font-weight: normal;">@Html.DisplayFor(modelItem => sp.Station.Name)</th>
+                                <th>@Html.DisplayFor(modelItem => sp.ArrivalTime) : </th>
+                                <th>@Html.DisplayFor(modelItem => sp.DepartureTime)</th>
+                            </tr>
+                        }
+                    </table>
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
 </table>

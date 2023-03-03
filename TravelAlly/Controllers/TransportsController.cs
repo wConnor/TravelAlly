@@ -54,6 +54,11 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,Type,Carrier,OperatesOnDays,RouteType")] Transport transport)
 		{
+			if (!User.Identity.IsAuthenticated)
+			{
+				return RedirectToAction(nameof(Index));
+			}
+
 			if (_service.CreateTransport(transport))
 			{
 				return RedirectToAction(nameof(Index));
@@ -84,7 +89,12 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Carrier,OperatesOnDays,RouteType")] Transport transport)
 		{
-			if (id != transport.Id)
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (id != transport.Id)
 			{
 				return NotFound();
 			}
@@ -120,7 +130,12 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id)
 		{
-			_service.DeleteTransport(id);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            _service.DeleteTransport(id);
 			return RedirectToAction(nameof(Index));
 		}
 	}

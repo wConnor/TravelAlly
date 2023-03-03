@@ -116,6 +116,11 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(int id, [Bind("StationId,Name,AcceptsTypes,Lat,Lon,CityName")] CreateStationViewModel csvm)
 		{
+			if (!User.Identity.IsAuthenticated)
+			{
+				return RedirectToAction(nameof(Index));
+			}
+
 			if (id != csvm.StationId)
 			{
 				return NotFound();
@@ -158,6 +163,11 @@ namespace TravelAlly.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id)
 		{
+			if (!User.Identity.IsAuthenticated)
+			{
+				return RedirectToAction(nameof(Index));
+			}
+
 			_service.DeleteStation(id);
 			return RedirectToAction(nameof(Index));
 		}

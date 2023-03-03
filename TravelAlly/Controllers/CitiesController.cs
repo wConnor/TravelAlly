@@ -52,6 +52,11 @@ namespace TravelAlly.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Lat,Lon,Country,Continent")] City city)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (_service.CreateCity(city))
             {
                 return RedirectToAction(nameof(Index));
@@ -86,6 +91,11 @@ namespace TravelAlly.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Lat,Lon,Country,Continent")] City city)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (id != city.Id)
             {
                 return NotFound();
@@ -124,6 +134,11 @@ namespace TravelAlly.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             _service.DeleteCity(id);
             return RedirectToAction(nameof(Index));
         }
