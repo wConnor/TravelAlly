@@ -13,16 +13,19 @@
     <h1>Edit Section</h1>
     <form asp-route="EditSection">
         <div class="form-group">
+            <!-- to be changed to <select> -->
             <label asp-for="Page" class="control-label"></label>
             <input asp-for="Page" class="form-control" readonly />
 
+            <!-- to be changed to <select> -->
             <label asp-for="Section" class="control-label"></label>
-            <input asp-for="Section" class="form-control" />
+            <input asp-for="Section" class="form-control" readonly />
 
             <label asp-for="Contents" class="control-label"></label>
-            <input asp-for="Contents" class="form-control" />
+            <textarea asp-for="Contents" rows="30" class="form-control"></textarea>
         </div>
-
+ 
+        <br/>
         <button type="submit">Submit</button>
     </form>
 

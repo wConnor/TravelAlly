@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TravelAlly.Models.SectionEntry>;
+
+@{
+	ViewData["Title"] = "History";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+</head>
+<body>
+	<h2>History</h2>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Id)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Page)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Section)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Contents)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Edited)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EditedByUser)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.Id)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Page)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Section)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Contents)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Edited)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EditedByUser)
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</body>

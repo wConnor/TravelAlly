@@ -16,6 +16,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+
+builder.Services.AddScoped<SectionEntryRepository>();
+builder.Services.AddScoped<SectionEntryService>();
 builder.Services.AddScoped<CityRepository>();
 builder.Services.AddScoped<CityService>();
 builder.Services.AddScoped<StationRepository>();
